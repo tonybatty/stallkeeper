@@ -1,0 +1,59 @@
+{
+  "startedAt": "2026-11-06T06:53:06.844Z",
+  "code": "U8BT",
+  "name": "Garden seed tins",
+  "suggestedPence": 500,
+  "typedAmount": "3.50",
+  "salesBefore": 1,
+  "pageBefore": [
+    "PayPal sandbox. No real money moves.",
+    "stallkeeper",
+    ".",
+    "Buyer",
+    "Demo stall",
+    "Garden seed tins",
+    "£5",
+    "Tag U8BT · Pay what you want, suggested",
+    "Seeded demo item",
+    "10% of today's takings go to Sample Charity. Seeded demo pledge.",
+    "The owner says: Empty, clean tins.",
+    "Four small tins with lids. Handy for seeds or screws.",
+    "Review and pay",
+    "Garden seed tins",
+    "Tag U8BT",
+    "Your amount, £",
+    "The owner suggests £5. Pay what you like.",
+    "Total",
+    "£5",
+    "Loading PayPal…",
+    "No chat on this item",
+    "This demo item is pay what you want, so there is nothing to haggle over. Some demo items take offers, and the AI stallholder answers questions about them.",
+    "Try an item with the AI stallholder",
+    "Tag code",
+    "Find item"
+  ],
+  "amountShown": "3.50",
+  "paypalHost": "www.sandbox.paypal.com",
+  "orderSuffix": "17460L",
+  "paidLine": "Paid £3.50. Take the ",
+  "checkoutTotal": "£3.50",
+  "paidAt": "2026-11-06T06:53:37.660Z",
+  "feedSale": {
+    "code": "U8BT",
+    "amountPence": 350,
+    "webhookVerified": true,
+    "time": "2026-11-06T06:53:37.184Z",
+    "webhookVerifiedAt": "2026-11-06T06:53:57.060Z"
+  },
+  "verifiedMarkOnScreen": true,
+  "captures": [
+    {
+      "suffix": "03244L",
+      "status": "COMPLETED",
+      "amountPence": 350,
+      "currency": "GBP"
+    }
+  ],
+  "outcome": "complete",
+  "endedAt": "2026-11-06T06:54:05.380Z"
+}

@@ -1,0 +1,165 @@
+/* Market awning: cream paper page, tomato awning, peach panels, ink buttons, yellow tag. */
+/* --line draws card and menu edges, so it keeps 3:1 against both --bg and --card. --rule only divides, so it stays light. */
+/* --panel fills cards, --sec-bg fills secondary buttons and chips, and --shadow lifts a card that sits on the page, so screens group by fill and spacing rather than outlines. */
+:root {
+  color-scheme: light;
+  --bg: #f8efe0; --ink: #201a16; --muted: #5a4e44; --card: #fffbf3; --line: #9a8268; --rule: #d1b995; --art-bg: #f7d7bd;
+  --chip: #ffd23f; --chip-ink: #201a16; --chip-radius: 8px;
+  --accent: #c8321f; --primary: #201a16; --primary-ink: #fffbf3;
+  --awning-red: #c8321f;
+  --ok: #17663a; --ok-bg: #dcefdf; --flag: #5a3a00; --flag-bg: #ffefcf; --stop: #8a2a1a; --stop-bg: #f8e1dc;
+  --pp: #0070e0; --pp-ink: #ffffff;
+  --font-display: Fraunces, Georgia, 'Times New Roman', serif; --font-body: Inter, system-ui, Arial, sans-serif;
+  --text-small: 0.9375rem; --text-body: 1.0625rem; --text-heading: 1.375rem;
+  --text-title: 2rem; --text-figure: 2.75rem; --text-code: 3.5rem;
+  --page-width: 30rem;
+  --titlebar-height: 52px; --titlebar-height-compact: 44px; --owner-tabs-height: 44px;
+  --radius: 16px; --radius-sm: 14px; --bw: 1.5px;
+  --panel: #fffbf3; --sec-bg: #f7e6cf; --shadow: 0 1px 2px rgba(32, 26, 22, 0.06), 0 6px 18px rgba(32, 26, 22, 0.08);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+/* The title bar stays fixed at the top, so a jump to an anchor or a card stops below it. */
+html { scroll-padding-top: calc(var(--titlebar-height) + 8px); }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: var(--text-body); line-height: 1.5; font-synthesis: none; -webkit-text-size-adjust: 100%; }
+button, input, select, textarea { font: inherit; }
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+h1 { margin: 0; font-family: var(--font-display); font-size: var(--text-title); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; }
+/* Short headings break evenly, so "A good find." never leaves one word on its own line. */
+h1, h2 { text-wrap: balance; }
+
+.app-titlebar { position: sticky; top: 0; z-index: 30; border-bottom: 1px solid var(--rule); background: var(--card); }
+.app-titlebar-inner { display: flex; align-items: center; gap: 8px; max-width: var(--page-width); height: var(--titlebar-height); margin: 0 auto; padding: 0 16px; overflow: hidden; }
+.app-titlebar.compact .app-titlebar-inner { height: var(--titlebar-height-compact); }
+#app:has(> .demo-page) { --page-width: 64rem; }
+#app:has(> .ledger) {
+  --page-width: none;
+  --bg: #f6f5f0; --card: #ffffff; --ink: #1c2925; --muted: #54615b;
+  --accent: #245b49; --primary: #245b49; --primary-ink: #ffffff;
+  --art-bg: #e8f1ec; --line: #7d8981; --rule: #dce1db;
+  --chip: #f0cc63; --chip-ink: #1c2925; --ok: #245b49; --ok-bg: #e8f1ec;
+  --radius: 12px; --radius-sm: 8px; --bw: 1px;
+}
+.app-wordmark { flex: none; display: inline-flex; align-items: center; min-height: 44px; color: var(--ink); font-family: var(--font-display); font-size: var(--text-heading); font-weight: 700; line-height: 1; letter-spacing: -0.01em; text-decoration: none; }
+.owner-tabs { display: flex; max-width: var(--page-width); height: var(--owner-tabs-height); margin: 0 auto; padding: 0 8px; }
+.owner-tabs a { display: flex; flex: 1; align-items: center; justify-content: center; min-width: 44px; border-bottom: 3px solid transparent; color: var(--muted); font-weight: 700; text-decoration: none; }
+.owner-tabs a[aria-current='page'] { border-bottom-color: var(--ink); color: var(--ink); }
+.page { display: flex; flex-direction: column; gap: 20px; max-width: var(--page-width); margin: 0 auto; padding: 16px 16px 28px; overflow-wrap: anywhere; }
+.topbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; min-height: 44px; }
+.wordmark { font-family: var(--font-display); font-size: var(--text-heading); font-weight: 700; line-height: 1; letter-spacing: -0.01em; }
+.wordmark em { font-style: normal; color: var(--accent); }
+.pill { padding: 6px 11px; border-radius: 999px; background: var(--ink); color: var(--card); font-size: var(--text-small); font-weight: 700; white-space: nowrap; }
+.btn { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 52px; padding: 12px 16px; border: var(--bw) solid var(--primary); border-radius: var(--radius-sm); background: var(--primary); color: var(--primary-ink); font-size: var(--text-body); font-weight: 700; line-height: 1.2; cursor: pointer; }
+.btn:disabled { background: var(--art-bg); border-color: var(--muted); color: var(--muted); cursor: default; }
+.btn.sec:not(:disabled) { background: var(--card); color: var(--ink); }
+a { color: inherit; text-underline-offset: 3px; }
+/* AG Studio 3.1.0 has no theme param for the field pill and add-field button edges; both read --ag-border-color, which also draws decorative dividers, so these controls take --muted for 3:1 against the page. */
+.ag-studio-field, .ag-studio-add-field-button { --ag-border-color: var(--muted); }
+.wordmark, a.btn { text-decoration: none; }
+h2 { font-family: var(--font-display); font-size: var(--text-heading); line-height: 1.2; margin: 0; }
+p { margin: 0; }
+.row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.row > * { min-width: 0; }
+.row h1, .row h2 { flex: 1 1 8rem; overflow-wrap: anywhere; }
+.card { display: flex; flex-direction: column; gap: 12px; padding: 18px; border: var(--bw) solid var(--line); border-radius: var(--radius); background: var(--card); overflow-wrap: anywhere; }
+.price-chip { align-self: flex-start; flex-shrink: 0; max-width: 100%; padding: 6px 10px; background: var(--chip); color: var(--chip-ink); border-radius: var(--chip-radius); font-family: var(--font-display); font-size: var(--text-heading); font-weight: 700; overflow-wrap: anywhere; }
+label, .item-form, .code-entry { display: flex; flex-direction: column; gap: 8px; }
+.item-form { gap: 14px; }
+.mode-choice { display: flex; flex-direction: column; gap: 8px; margin: 0; padding: 0; border: 0; }
+.mode-choice legend { padding: 0; margin-bottom: 8px; }
+.mode-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+.mode-buttons .btn { flex: 1 1 8rem; }
+.mode-buttons .btn[aria-pressed="true"] { background: var(--ink); color: var(--card); }
+input, select, textarea { width: 100%; min-width: 0; max-width: 100%; min-height: 44px; border: var(--bw) solid var(--ink); border-radius: 8px; padding: 10px; font: inherit; font-size: var(--text-body); color: var(--ink); background: var(--card); }
+textarea { resize: vertical; }
+.muted { color: var(--muted); font-size: var(--text-small); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.notice { padding: 16px; border: var(--bw) solid var(--ink); border-radius: var(--radius); background: var(--flag-bg); }
+.notes { white-space: pre-wrap; }
+.stock-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.stock-grid .card { text-decoration: none; padding: 12px; }
+@media (max-width: 360px) { .stock-grid { grid-template-columns: 1fr; } }
+
+.item-photo { display: block; width: 100%; height: 240px; object-fit: contain; background: var(--art-bg); border-radius: var(--radius-sm); }
+.photo-placeholder { display: flex; align-items: center; justify-content: center; color: var(--muted); }
+/* Chat as a messenger: bubbles, then a composer pinned to the bottom of the screen. */
+.page.chatting { gap: 0; padding-top: 4px; padding-bottom: 0; }
+.chat-screen { display: flex; flex-direction: column; flex: 1; min-height: calc(100dvh - 4px - var(--titlebar-height)); }
+.chat-head { display: flex; flex-direction: column; gap: 2px; padding: 4px 0 12px; border-bottom: 1px solid var(--rule); }
+.chat-back { align-self: flex-start; min-width: 44px; min-height: 44px; padding: 0; border: 0; background: none; color: var(--ink); font-weight: 600; cursor: pointer; }
+.chat-back::before { content: '\2039  '; font-size: var(--text-heading); line-height: 1; }
+.chat-item { font-weight: 700; font-size: var(--text-body); }
+.buyer-chat { display: flex; flex: 1; flex-direction: column; }
+.thread { display: flex; flex: 1; flex-direction: column; gap: 12px; padding: 16px 0; }
+.bubble { max-width: 85%; padding: 10px 14px; border-radius: 18px; font-size: var(--text-body); line-height: 1.4; white-space: pre-wrap; }
+.bubble.ai { align-self: flex-start; background: var(--panel); border-bottom-left-radius: 4px; }
+.bubble.from-buyer { align-self: flex-end; background: var(--ink); color: var(--card); border-bottom-right-radius: 4px; }
+.speaker { align-self: flex-start; margin: 4px 0 -8px 4px; color: var(--muted); font-size: var(--text-small); font-weight: 700; line-height: 1.2; }
+.bubble.intro { margin: 16px 0 12px; max-width: 100%; }
+.buyer-chat .offer-card { margin-bottom: 16px; }
+.composer { position: sticky; bottom: 0; display: flex; flex-direction: column; gap: 10px; padding: 12px 0 calc(12px + env(safe-area-inset-bottom)); border-top: 1px solid var(--rule); background: var(--bg); }
+.composer small, .chat-status { font-size: var(--text-small); }
+.chat-prompts { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { flex: none; min-height: 44px; padding: 6px 12px; border: var(--bw) solid var(--ink); border-radius: 999px; background: var(--card); color: var(--ink); font-size: var(--text-small); font-weight: 600; cursor: pointer; }
+.chip.solid { background: var(--chip); border-color: var(--chip); }
+.chip:disabled { color: var(--muted); border-color: var(--muted); cursor: default; }
+.composer-row { display: flex; gap: 8px; }
+.composer-row input { flex: 1; border-radius: 999px; padding-inline: 16px; }
+.send { flex: none; width: 44px; height: 44px; border: 0; border-radius: 50%; background: var(--ink); color: var(--card); font-size: var(--text-body); cursor: pointer; }
+.send:disabled { border: var(--bw) solid var(--muted); background: var(--card); color: var(--muted); cursor: default; }
+
+.page > *, .card > *, form { min-width: 0; }
+button, summary { min-width: 44px; min-height: 44px; }
+/* A link inside a sentence stays inline, so its line keeps the paragraph's spacing; its padding still gives it a taller hit area. */
+.page a:not(.card, p a), .page p.card a, .print-controls a { display: inline-flex; align-items: center; min-width: 44px; min-height: 44px; }
+.page p:not(.card) a { position: relative; padding: 14px; margin-inline: -14px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.page p:not(.card) a:focus-visible { outline-offset: -12px; }
+nav.row > * { flex: 1 1 6rem; }
+h3 { font-family: var(--font-display); font-size: var(--text-heading); line-height: 1.3; margin: 0; }
+small { font-size: var(--text-small); }
+input::file-selector-button { min-height: 44px; font: inherit; }
+summary { cursor: pointer; padding-block: 10px; }
+form > .btn { margin-top: 8px; }
+@media (max-width: 24rem) { .card { padding: 14px; } }
+
+.btn.pay-action { background: var(--pp); border-color: var(--pp); color: var(--pp-ink); }
+
+.item-card.compact { padding: 0; border: 0; background: none; gap: 8px; }
+.item-card.compact .item-photo, .item-card.compact .item-illustration { height: 190px; max-height: 190px; }
+.item-card .meta, .item-card .says { margin: 0; }
+.meta { font-size: var(--text-small); color: var(--muted); }
+.says { font-size: var(--text-body); }
+.says b { font-weight: 600; }
+.stack { display: flex; flex-direction: column; gap: 10px; }
+/* One style for every fold: a plain row between rules. A dashed box read as an empty drop zone. */
+.disclosure { border-block: 1px solid var(--rule); }
+.disclosure + .disclosure { border-top: 0; }
+.disclosure > summary { display: flex; align-items: center; gap: 8px; min-height: 44px; padding-block: 8px; font-weight: 600; cursor: pointer; list-style: none; }
+/* A flex summary loses the browser's own marker, and a fold with no marker reads as a heading, so each one draws its own. */
+.disclosure > summary::-webkit-details-marker { display: none; }
+.disclosure > summary::before { content: '\25B8'; flex: none; color: var(--muted); transition: transform 150ms ease-out; }
+.disclosure[open] > summary::before { transform: rotate(90deg); }
+@media (prefers-reduced-motion: reduce) { .disclosure > summary::before { transition: none; } }
+.disclosure[open] { padding-bottom: 8px; }
+/* A text-only action, for a secondary step that must not compete with the one filled button on the screen. */
+.text-button { align-self: center; width: auto; min-height: 44px; padding: 0 8px; border: 0; background: none; color: var(--ink); font: inherit; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.text-button:disabled { color: var(--muted); cursor: default; }
+
+/* Paid, sold and reserved screens fill at least one phone screen, below the title bar. */
+.page.fill { min-height: calc(100dvh - var(--titlebar-height)); }
+.page.fill > .bottom { margin-top: auto; }
+.status-pill { align-self: flex-start; flex-shrink: 0; padding: 6px 12px; border-radius: var(--chip-radius); background: var(--art-bg); color: var(--muted); font-family: var(--font-display); font-size: var(--text-body); font-weight: 700; }
+.item-card.sold .item-photo, .item-card.sold .item-illustration { opacity: 0.55; }
+/* Pay what you want and free item pages stay short: tight gaps, and a small illustration or placeholder when there is no photograph. */
+.page.simple { gap: 10px; padding-bottom: 12px; }
+/* A compact card has no edge of its own, so it keeps no padding and lines up with the pay card under it. */
+.page.simple .card:not(.compact) { gap: 8px; padding: 14px; margin-block: 0; }
+.page.simple .card.compact { gap: 8px; }
+.page.simple .item-card .item-photo, .page.simple .item-card .item-illustration { height: 80px; max-height: 80px; }
+.page.simple .sandbox-buyer { margin-block: 0; }
+.item-form .link { background: none; border: 0; padding: 0; min-height: 44px; color: inherit; text-decoration: underline; font: inherit; cursor: pointer; align-self: center; }
+.item-form .link.danger { color: var(--stop, #a4262c); }
+.form-actions { display: flex; align-items: center; gap: 16px; margin-top: 8px; }
+.form-actions .link { flex: none; }
+
+@media print { .app-titlebar { display: none; } }

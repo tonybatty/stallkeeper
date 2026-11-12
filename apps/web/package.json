@@ -1,0 +1,26 @@
+{
+  "name": "@stallkeeper/web",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "typecheck": "vue-tsc --noEmit"
+  },
+  "dependencies": {
+    "@fontsource/inter": "^5.3.0",
+    "@fontsource/fraunces": "^5.3.0",
+    "ag-studio": "3.1.0",
+    "ag-studio-vue3": "3.1.0",
+    "vue": "^3.5.44",
+    "vue-router": "^5.4.0"
+  },
+  "devDependencies": {
+    "@paypal/paypal-js": "^9.1.0",
+    "@vitejs/plugin-vue": "^6.0.0",
+    "@vue/test-utils": "^2.5.1",
+    "happy-dom": "^21.0.4",
+    "vite": "^8.3.5",
+    "vue-tsc": "^3.1.0"
+  }
+}

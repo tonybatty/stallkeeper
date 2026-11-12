@@ -1,0 +1,56 @@
+services:
+  - type: web
+    name: stallkeeper
+    runtime: node
+    # Not corepack: the Corepack bundled with Node 22.22.0 looks for bin/pnpm.cjs, which pnpm 12 no longer ships. Keep the version equal to packageManager in package.json.
+    buildCommand: npm install -g pnpm@12.6.0 && pnpm install --frozen-lockfile && pnpm build
+    startCommand: pnpm --filter @stallkeeper/api start
+    healthCheckPath: /api/health
+    envVars:
+      - key: PAYPAL_CLIENT_ID
+        sync: false
+      - key: PAYPAL_CLIENT_SECRET
+        sync: false
+      - key: PAYPAL_WEBHOOK_ID
+        sync: false
+      # Hosted button ID of a sandbox PayPal Donate button. Public, and optional: without it the closing report shows the pledge and no Donate button.
+      - key: PAYPAL_DONATE_BUTTON_ID
+        sync: false
+      - key: DATABASE_URL
+        sync: false
+      - key: OWNER_PASSWORD
+        sync: false
+      - key: DEMO_OWNER_PASSWORD
+        sync: false
+      # Dedicated judge sandbox buyer login, shown publicly on /demo. Never a personal or live account.
+      - key: DEMO_BUYER_EMAIL
+        sync: false
+      - key: DEMO_BUYER_PASSWORD
+        sync: false
+      # Optional https link to the demo film. /demo links to it once set.
+      - key: DEMO_FILM_URL
+        sync: false
+      # Optional https link to the public repository. Change this when the public copy is ready.
+      - key: DEMO_REPO_URL
+        value: https://github.com/tonybatty/stallkeeper
+      - key: SESSION_SECRET
+        sync: false
+      - key: PUBLIC_BASE_URL
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      # Comparable new prices on the add-item form. Optional: without it the lookup returns 503 and prices stay manual.
+      - key: CHANNEL3_API_KEY
+        sync: false
+      - key: AI_DAILY_CAP_USD
+        sync: false
+      # The stall ledger's share of the daily AI budget. Optional, default 1.
+      - key: AI_LEDGER_DAILY_CAP_USD
+        sync: false
+      # Optional. Every owner session can read it, including the demo owner published on /demo, so it is browser-visible. Use a low-value trial key. Without it the ledger shows AG Studio's trial watermark.
+      - key: AG_STUDIO_LICENCE_KEY
+        sync: false

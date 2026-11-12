@@ -1,0 +1,326 @@
+{
+ "products": [
+  {
+   "id": "YvSMNI6",
+   "title": "Overton Round Wall Mirror",
+   "description": "The Laura Ashley Overton Round Wall Mirror is an elegant home accessory inspired by the French Baroque style. It features a slender circular frame adorned with a ring of raised studs and is crowned by a highly decorative carved-effect pediment. The mirror is finished in a luxurious silver paint and is designed for wall mounting in living rooms, though it is not suitable for bathroom use.",
+   "brands": [
+    {
+     "id": "cxDs",
+     "name": "Laura Ashley"
+    }
+   ],
+   "images": [
+    {
+     "url": "https://cdn.trychannel3.com/d61fd497-3f98-49ed-9f01-db7faaffcd49",
+     "cleaned_url": null,
+     "is_main_image": true,
+     "shot_type": "hero",
+     "alt_text": "Ornate silver-framed round wall mirror hanging on a light gray wall."
+    },
+    {
+     "url": "https://cdn.trychannel3.com/250afc50-a06e-432a-915a-25a83781c208",
+     "cleaned_url": "https://cdn.trychannel3.com/cleaned/v1/250afc50-a06e-432a-915a-25a83781c208",
+     "is_main_image": false,
+     "shot_type": "hero",
+     "alt_text": "Ornate silver-framed round wall mirror shown against a plain background."
+    },
+    {
+     "url": "https://cdn.trychannel3.com/3819ab50-418d-410b-b7a7-0b3003a673aa",
+     "cleaned_url": null,
+     "is_main_image": false,
+     "shot_type": "hero",
+     "alt_text": "Round wall mirror showing dimensions of 73cm x 58cm."
+    }
+   ],
+   "category": {
+    "slug": "wall-mirrors",
+    "title": "Wall Mirrors",
+    "path": [
+     {
+      "slug": "home-garden",
+      "title": "Home & Garden"
+     },
+     {
+      "slug": "decor",
+      "title": "Decor"
+     },
+     {
+      "slug": "mirrors",
+      "title": "Mirrors"
+     },
+     {
+      "slug": "wall-mirrors",
+      "title": "Wall Mirrors"
+     }
+    ],
+    "has_children": false
+   },
+   "gender": null,
+   "age": null,
+   "materials": [
+    "Glass",
+    "MDF"
+   ],
+   "key_features": [
+    "Ornate French Baroque style",
+    "Highly decorative carved-effect pediment",
+    "Slender circular frame with raised studs",
+    "Luxurious painted finish",
+    "Fitted with hanging keyhole plates",
+    "2 year guarantee included"
+   ],
+   "colors": [
+    {
+     "hex": "#f0eef1",
+     "percentage": 0.7816
+    },
+    {
+     "hex": "#c5c3c5",
+     "percentage": 0.1304
+    },
+    {
+     "hex": "#8e8c8d",
+     "percentage": 0.088
+    }
+   ],
+   "offers": [
+    {
+     "url": "https://buy.trychannel3.com/YvSMNI6-prTs-redacted",
+     "domain": "next.co.uk",
+     "price": {
+      "price": 150,
+      "compare_at_price": null,
+      "currency": "GBP"
+     },
+     "availability": "InStock",
+     "condition": "new",
+     "max_commission_rate": 0,
+     "dimensions": {
+      "length": null,
+      "width": {
+       "number": 58,
+       "unit": "cm"
+      },
+      "height": {
+       "number": 72,
+       "unit": "cm"
+      },
+      "weight": null
+     }
+    },
+    {
+     "url": "https://buy.trychannel3.com/YvSMNI6-cGQJ-redacted",
+     "domain": "johnlewis.com",
+     "price": {
+      "price": 150,
+      "compare_at_price": null,
+      "currency": "GBP"
+     },
+     "availability": "InStock",
+     "condition": "new",
+     "max_commission_rate": 0,
+     "dimensions": {
+      "length": null,
+      "width": {
+       "number": 58,
+       "unit": "cm"
+      },
+      "height": {
+       "number": 73,
+       "unit": "cm"
+      },
+      "weight": {
+       "number": 3,
+       "unit": "kg"
+      }
+     }
+    }
+   ],
+   "variants": null,
+   "structured_attributes": {
+    "mirror-type": [
+     "Wall"
+    ],
+    "pattern": [
+     "Solid"
+    ],
+    "material": [
+     "Metal",
+     "Glass",
+     "Medium density fiberboard (MDF)"
+    ],
+    "lighting-options": [
+     "Non-illuminated"
+    ],
+    "shape": [
+     "Round"
+    ],
+    "mounting-type": [
+     "Wall",
+     "Hanging"
+    ]
+   },
+   "ratings": null
+  },
+  {
+   "id": "gY6Tg7V",
+   "title": "Round Wall Mirror",
+   "description": "Enhance your living space with this elegant 80cm round wall mirror. Featuring a sleek silver metallic frame, this circular mirror is designed to balance the angular lines of traditional furniture while adding a sense of openness, light, and modernity to any room. Its clean and uncomplicated design makes it a versatile choice for both contemporary and classic interior styles.",
+   "brands": [
+    {
+     "id": "0jtX",
+     "name": "Madison & Mayfair"
+    }
+   ],
+   "images": [
+    {
+     "url": "https://cdn.trychannel3.com/e1d9a8fd-9ed8-4802-b543-855901e95a32",
+     "cleaned_url": null,
+     "is_main_image": true,
+     "shot_type": "lifestyle",
+     "alt_text": "Round silver framed mirror with plants in a living room setting."
+    },
+    {
+     "url": "https://cdn.trychannel3.com/a87205d6-16f6-4231-a467-0125c9862733",
+     "cleaned_url": null,
+     "is_main_image": false,
+     "shot_type": "hero",
+     "alt_text": "Round white framed mirror hanging above a dark wood console."
+    },
+    {
+     "url": "https://cdn.trychannel3.com/10c46948-6a2d-4610-a1ba-f9b1793d7091",
+     "cleaned_url": null,
+     "is_main_image": false,
+     "shot_type": "lifestyle",
+     "alt_text": "Round silver framed mirror on a grey mantelpiece."
+    },
+    {
+     "url": "https://cdn.trychannel3.com/328690b7-976d-4b82-83b3-5ec8e5f96b04",
+     "cleaned_url": null,
+     "is_main_image": false,
+     "shot_type": "lifestyle",
+     "alt_text": "Round silver framed mirror surrounded by green houseplants."
+    },
+    {
+     "url": "https://cdn.trychannel3.com/ca0782a9-db10-4407-a922-75f799d102cb",
+     "cleaned_url": null,
+     "is_main_image": false,
+     "shot_type": "lifestyle",
+     "alt_text": "Round silver framed mirror in a dark blue interior with plants."
+    },
+    {
+     "url": "https://cdn.trychannel3.com/f8540e23-b6b0-4089-8bde-f07e85e9ccf9",
+     "cleaned_url": "https://cdn.trychannel3.com/78d63a2c-a224-4c6c-bcaf-1619147cadb0",
+     "is_main_image": false,
+     "shot_type": "detail",
+     "alt_text": "Close-up of the round mirror's clear glass surface."
+    }
+   ],
+   "category": {
+    "slug": "wall-mirrors",
+    "title": "Wall Mirrors",
+    "path": [
+     {
+      "slug": "home-garden",
+      "title": "Home & Garden"
+     },
+     {
+      "slug": "decor",
+      "title": "Decor"
+     },
+     {
+      "slug": "mirrors",
+      "title": "Mirrors"
+     },
+     {
+      "slug": "wall-mirrors",
+      "title": "Wall Mirrors"
+     }
+    ],
+    "has_children": false
+   },
+   "gender": null,
+   "age": null,
+   "materials": [
+    "Glass",
+    "Metal"
+   ],
+   "key_features": [
+    "Trending circular shape",
+    "Silver metallic frame",
+    "Designed to increase space and light in rooms",
+    "Suitable for contemporary and classic interiors",
+    "Wall mirror",
+    "Large size statement piece"
+   ],
+   "colors": [
+    {
+     "hex": "#d3e7e6",
+     "percentage": 1
+    }
+   ],
+   "offers": [
+    {
+     "url": "https://buy.trychannel3.com/gY6Tg7V-SfuP-redacted",
+     "domain": "madisonandmayfair.com",
+     "price": {
+      "price": 78.29,
+      "compare_at_price": 89.99,
+      "currency": "GBP"
+     },
+     "availability": "InStock",
+     "condition": "new",
+     "max_commission_rate": 0,
+     "dimensions": null
+    },
+    {
+     "url": "https://buy.trychannel3.com/gY6Tg7V-j49J-redacted",
+     "domain": "debenhams.com",
+     "price": {
+      "price": 85,
+      "compare_at_price": null,
+      "currency": "GBP"
+     },
+     "availability": "InStock",
+     "condition": "new",
+     "max_commission_rate": 0.07,
+     "dimensions": null
+    }
+   ],
+   "variants": null,
+   "structured_attributes": {
+    "mounting-type": [
+     "Wall"
+    ],
+    "mirror-type": [
+     "Wall"
+    ],
+    "shape": [
+     "Round"
+    ],
+    "pattern": [
+     "Solid"
+    ],
+    "frame-design": [
+     "Metal"
+    ],
+    "edge-style": [
+     "Square"
+    ],
+    "material": [
+     "Metal",
+     "Glass"
+    ],
+    "lighting-options": [
+     "Non-illuminated"
+    ],
+    "orientation": [
+     "Vertical"
+    ]
+   },
+   "ratings": null
+  }
+ ],
+ "next_page_token": null
+}

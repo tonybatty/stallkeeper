@@ -1,0 +1,36 @@
+/* The app palette follows the rendered page, so the ledger keeps its own theme on navigation. Print tags shares it, so its title bar, tabs and buttons match the other owner pages. */
+/* App pages keep the cream --bg from styles.css; cards, bubbles and panels are white on it. */
+body:has(#app > .page, #app > .print-page) {
+  --ink: #24231f; --muted: #5c605e; --card: #ffffff;
+  --line: #7a7d77; --rule: #ddceb5; --art-bg: #efe0c8;
+  --primary: #24231f; --primary-ink: #ffffff;
+  --chip: #ffd23f; --chip-ink: #24231f;
+  --radius: 12px; --radius-sm: 10px; --bw: 1px;
+  --ok: #17663a; --ok-bg: #cee3c6; --flag: #664c00; --flag-bg: #f7dc86;
+  --panel: #ffffff; --sec-bg: #ebd7b8;
+}
+
+/* Print tags is a plain white page, so the sheet looks the same on screen as on paper. */
+body:has(#app > .print-page) { --bg: #ffffff; }
+
+/* The canopy and counter align with the capitals; the speech tail extends below the baseline. */
+.app-mark { flex: none; width: 0.85em; height: 0.8875em; margin-right: 8px; transform: translateY(0.04em); }
+
+:where(#app > .page, #app > .print-page) {
+  /* Cards are white panels on the cream page, with no outline. Inputs keep their --line edge, so every field still reads as a field. */
+  /* The exclusions sit in :where so the panel fill weighs one class, and a component's own card rule (a compact pay card, the retail lookup, a taken item) still wins. */
+  & .card:where(:not(a):not(button):not(.offer-card)) { border-color: transparent; background: var(--panel); }
+  & a.card, & button.card, & .offer-card { border-color: transparent; background: var(--card); box-shadow: var(--shadow); }
+  /* The item is the page itself, so its card is not boxed. */
+  & .item-card.card:not(a):not(button) { padding: 0; background: none; }
+  & input, & select, & textarea { border-color: var(--line); }
+  /* Disabled ones keep the tint too, with the muted text their base rule gives them. Both button states are named so the tint weighs the same as the base fill it replaces. */
+  & .btn.sec:not(:disabled), & .btn.sec:disabled, & .chip:not(.solid) { border-color: transparent; background: var(--sec-bg); }
+  & .chip.solid:disabled { border-color: var(--chip); }
+  & .btn:disabled { border-color: transparent; }
+  & .send:disabled { border-color: transparent; background: var(--sec-bg); }
+  & .mode-buttons .btn[aria-pressed='true'] { background: var(--ink); }
+  & .notice { border-color: transparent; }
+  & .topbar, & .item-card.compact, & .stack { gap: 12px; }
+  & .item-form { gap: 20px; }
+}

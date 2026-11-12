@@ -1,0 +1,157 @@
+{
+  "takeId": "take-1",
+  "supersedes": null,
+  "mode": "real",
+  "model": "claude",
+  "environment": "iOS Simulator, Safari, iPhone 17",
+  "build": {
+    "commit": "7cb5a82",
+    "web": "index-UOaHVAWw.js"
+  },
+  "host": "stallkeeper.onrender.com",
+  "startedAt": "2026-11-06T03:04:31.253Z",
+  "reach": "closing",
+  "endedAt": "2026-11-06T03:08:04.515Z",
+  "approval": {
+    "reservationSeconds": 300,
+    "loginFormMs": 3231,
+    "reservedToPaidMs": 15351,
+    "approveToPaidMs": 4176,
+    "captureSentWhile": "hidden",
+    "pageReloaded": false,
+    "paypalTabClosedAfterMs": 458,
+    "buyerPageShownAfterMs": 464
+  },
+  "status": "complete",
+  "problems": [],
+  "itemCode": "VTCS",
+  "tag": {
+    "decodedPath": "/i/VTCS",
+    "openedItemName": "Brass desk lamp"
+  },
+  "askingPence": 2800,
+  "agreedPence": 2400,
+  "checkoutPence": 2400,
+  "checkoutSuffix": "b27193",
+  "approvalOrderSuffix": "59123L",
+  "paypalHost": "www.sandbox.paypal.com",
+  "orderSuffix": "59123L",
+  "captureSuffix": "73880U",
+  "captureCurrency": "GBP",
+  "webhookEventSuffix": "72281K",
+  "totalsBefore": {
+    "recordedSalesPence": 0,
+    "itemsSold": 0
+  },
+  "totalsAfter": {
+    "recordedSalesPence": 2400,
+    "itemsSold": 1
+  },
+  "closing": {
+    "stagedCode": "KX2W",
+    "status": "final",
+    "recordedSalesPence": 2400,
+    "differenceCodes": [
+      "KX2W"
+    ],
+    "shownOnScreen": true
+  },
+  "aiSpend": {
+    "beforeUsd": 0.021268,
+    "afterUsd": 0.030374
+  },
+  "aiReplies": [
+    {
+      "question": "Does it work?",
+      "reply": "The owner says it's tested and it works. There's a small scuff on the base, and it takes a standard screw bulb. The asking price is £28."
+    },
+    {
+      "question": "Is the shade original?",
+      "reply": "I don't know. The owner's notes don't cover whether the shade is original. They only say it's tested and works, there's a small scuff on the base, and it takes a standard screw bulb."
+    },
+    {
+      "question": "I offer £15.",
+      "reply": "<invoke name=\"respond_to_offer\">\n<parameter name=\"amountPence\">1500</parameter>\n</invoke>"
+    }
+  ],
+  "beats": [
+    {
+      "id": "earlier",
+      "startedAt": "2026-11-06T03:04:45.368Z",
+      "endedAt": "2026-11-06T03:04:52.956Z",
+      "outcome": "done"
+    },
+    {
+      "id": "tag-url",
+      "startedAt": "2026-11-06T03:04:52.956Z",
+      "endedAt": "2026-11-06T03:04:56.365Z",
+      "outcome": "done"
+    },
+    {
+      "id": "question",
+      "startedAt": "2026-11-06T03:04:56.365Z",
+      "endedAt": "2026-11-06T03:05:07.413Z",
+      "outcome": "done"
+    },
+    {
+      "id": "offer",
+      "startedAt": "2026-11-06T03:05:07.413Z",
+      "endedAt": "2026-11-06T03:05:13.160Z",
+      "outcome": "done"
+    },
+    {
+      "id": "agree",
+      "startedAt": "2026-11-06T03:05:13.160Z",
+      "endedAt": "2026-11-06T03:05:16.694Z",
+      "outcome": "done"
+    },
+    {
+      "id": "reserve",
+      "startedAt": "2026-11-06T03:05:16.694Z",
+      "endedAt": "2026-11-06T03:05:23.080Z",
+      "outcome": "done"
+    },
+    {
+      "id": "approve",
+      "startedAt": "2026-11-06T03:05:23.080Z",
+      "endedAt": "2026-11-06T03:05:53.154Z",
+      "outcome": "done"
+    },
+    {
+      "id": "paid",
+      "startedAt": "2026-11-06T03:05:53.154Z",
+      "endedAt": "2026-11-06T03:05:53.154Z",
+      "outcome": "skipped",
+      "note": "The take reads the paid page inside the approve beat, so there is no separate step."
+    },
+    {
+      "id": "feed",
+      "startedAt": "2026-11-06T03:05:53.154Z",
+      "endedAt": "2026-11-06T03:06:33.427Z",
+      "outcome": "done"
+    },
+    {
+      "id": "closing",
+      "startedAt": "2026-11-06T03:06:33.427Z",
+      "endedAt": "2026-11-06T03:06:49.460Z",
+      "outcome": "done"
+    }
+  ],
+  "recordings": [
+    {
+      "role": "buyer",
+      "file": "buyer.mp4",
+      "startedAt": "2026-11-06T03:04:45.364Z"
+    },
+    {
+      "role": "owner",
+      "file": "owner.mp4",
+      "startedAt": "2026-11-06T03:04:45.366Z"
+    },
+    {
+      "role": "rival",
+      "file": "rival.mp4",
+      "startedAt": "2026-11-06T03:04:45.367Z"
+    }
+  ]
+}

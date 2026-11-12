@@ -1,0 +1,29 @@
+{
+  "command": "resend",
+  "takeId": "take-1",
+  "eventSuffix": "72281K",
+  "captureSuffix": "73880U",
+  "resendStatus": 202,
+  "sentAt": "2026-11-06T03:08:25.800Z",
+  "readAt": "2026-11-06T03:10:28.229Z",
+  "waitedSeconds": 120,
+  "before": {
+    "captureStatus": "COMPLETED",
+    "captureAmount": "24.00",
+    "captureCurrency": "GBP",
+    "captureCount": 1,
+    "recordedSalesPence": 2400,
+    "itemsSold": 1,
+    "saleRows": 1
+  },
+  "after": {
+    "captureStatus": "COMPLETED",
+    "captureAmount": "24.00",
+    "captureCurrency": "GBP",
+    "captureCount": 1,
+    "recordedSalesPence": 2400,
+    "itemsSold": 1,
+    "saleRows": 1
+  },
+  "unchanged": true
+}

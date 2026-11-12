@@ -1,0 +1,13 @@
+{
+  "command": "decline",
+  "orderSuffix": "58482R",
+  "currency": "GBP",
+  "amount": "24.00",
+  "mockHeader": "INSTRUMENT_DECLINED",
+  "captureStatus": 422,
+  "name": "UNPROCESSABLE_ENTITY",
+  "issues": [
+    "INSTRUMENT_DECLINED"
+  ],
+  "at": "2026-11-06T03:04:22.109Z"
+}

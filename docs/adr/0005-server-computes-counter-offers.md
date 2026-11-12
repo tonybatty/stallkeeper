@@ -1,0 +1,3 @@
+# The server computes counter-offers; the AI stallholder decides how to use them
+
+The AI stallholder never sees the floor, so letting it propose prices freely would mean guessing upward against rejections, which is slow, unpredictable on camera and can concede more than necessary. Instead a tool takes the buyer's offer and returns acceptance or a permitted counter-offer from a server-side ladder based on asking price, floor and round. The model chooses whether to answer, counter, hold firm or point to Pay, and explains in its own words. An agreed price exists only when the buyer taps a server-issued offer card, so no free-text reading can create one.

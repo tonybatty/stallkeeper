@@ -1,0 +1,1197 @@
+{
+  "info": {
+    "name": "Stallkeeper sandbox API",
+    "description": "Manual API reference. Seeded/scripted scenarios; sandbox only. Read postman/README.md before sending mutations. External services are not mocked by this collection. No browser approval, credentials or live run evidence is included.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5173",
+      "type": "string"
+    },
+    {
+      "key": "ownerPassword",
+      "value": "owner",
+      "type": "string"
+    },
+    {
+      "key": "code",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "itemId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "cardId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "agreedPriceId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "checkoutId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "paypalOrderId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "sessionId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "webhookAuthAlgo",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "webhookCertUrl",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "webhookTransmissionId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "webhookTransmissionSig",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "webhookTransmissionTime",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Public and buyer session",
+      "item": [
+        {
+          "name": "Health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/health",
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "name": "PayPal browser configuration",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/config",
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "name": "Main stall",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/stall",
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "name": "Seeded demo and judge access",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/demo",
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "name": "Open item and establish buyer cookie",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/i/{{code}}",
+            "description": "Keep this cookie jar for chat, card acceptance and checkout. Get a code from the demo or owner item response."
+          },
+          "response": []
+        },
+        {
+          "name": "Read item photo",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/i/{{code}}/photo",
+            "description": "Returns JPEG, or 404 when absent. Demo items use illustrations."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Owner stock and tags",
+      "item": [
+        {
+          "name": "Owner login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/owner/login",
+            "description": "Local main owner: owner. Local demo owner: demo. Cookie jar stores the owner cookie; hosted passwords are environment-specific.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"password\": \"{{ownerPassword}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Owner stall",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/owner/stall",
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "name": "List items",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/owner/items",
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "name": "Preview counter-offer ladder",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/owner/ladder",
+            "description": "Owner only and read-only. Returns the counter-offers the server's ladder would issue for these prices. Reads and stores nothing. Returns 400 when the floor is above the asking price. It is a POST so the floor stays out of request logs.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"askingPence\": 2800,\n  \"floorPence\": 2000\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Look up comparable new prices (Channel3)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/owner/retail/lookup",
+            "description": "Owner only. Searches Channel3 for GBP offers in the UK. Returns 503 when CHANNEL3_API_KEY is unset or Channel3 fails, and 429 after 30 lookups an hour for a stall. Each candidate's reference also carries the listing's `description` (up to 600 characters) and `facts`: up to eight plain-text lines (brand, materials, key features, then structured attributes, each under 120 characters), from the same search response with no extra Channel3 call. A candidate with `missingWords` is a doubtful match and carries an empty description and no facts. The server stores them with the chosen product's reference, and the AI stallholder reads them as the retailer's listing for a new one, apart from the owner's notes. Buyer pages never carry them. Pass a returned productId as retailProductId when creating or editing an item, and the server fetches that product's price itself. Pass retailDoubtful: false with it for a candidate with no `missingWords` so the server stores the listing's details for the AI stallholder. Pass true, or leave it out, and the server stores the price line with no listing details.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"round wall mirror\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Look up comparable new prices from a photo (Channel3)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "image/jpeg"
+              }
+            ],
+            "url": "{{baseUrl}}/api/owner/retail/image-lookup",
+            "description": "Owner only. Sends one JPEG of at most 512 KiB to the Stallkeeper API. The server encodes it for Channel3 image search with country GB and currency GBP; the key never reaches the browser. Returns the same candidates as text search, including owner-only used offers and suggested prices based only on an in-stock new GBP offer. Returns 503 when CHANNEL3_API_KEY is unset or Channel3 fails, and 429 after 30 combined text, image and product lookups an hour for a stall. A failure does not block manual pricing.",
+            "body": {
+              "mode": "file",
+              "file": {
+                "src": ""
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create haggle item",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/owner/items",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Scripted brass lamp\",\n  \"notes\": \"Used; scuff on base. Seeded scenario. Owner says it works. Height unknown.\",\n  \"mode\": \"haggle\",\n  \"askingPence\": 2800,\n  \"floorPence\": 1800\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code >= 200 && pm.response.code < 300) {",
+                  "  const data = pm.response.json();",
+                  "  pm.collectionVariables.set(\"itemId\", data.id);",
+                  "  pm.collectionVariables.set(\"code\", data.code);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Create pay-what-you-want item",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/owner/items",
+            "description": "askingPence is the owner's expected amount, optional and for the owner's own records: buyer responses send it as null. The optional minimumPence is shown to buyers. Buyers pick their own amount at checkout, up to £500.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Scripted seed tins\",\n  \"notes\": \"Empty, clean tins. Seeded scenario. Four tins with lids.\",\n  \"mode\": \"pwyw\",\n  \"askingPence\": 500,\n  \"minimumPence\": 200\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code >= 200 && pm.response.code < 300) {",
+                  "  const data = pm.response.json();",
+                  "  pm.collectionVariables.set(\"itemId\", data.id);",
+                  "  pm.collectionVariables.set(\"code\", data.code);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Create free item",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/owner/items",
+            "description": "A free item has no price. askingPence is only the owner's expected tip, optional, at most £500 and never sent to buyers. Buyers take it with POST /api/i/{code}/take, with no PayPal step, and may add a tip afterwards.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Scripted cookbooks\",\n  \"notes\": \"Well used. Seeded scenario. A box of old cookbooks.\",\n  \"mode\": \"free\",\n  \"askingPence\": 200\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code >= 200 && pm.response.code < 300) {",
+                  "  const data = pm.response.json();",
+                  "  pm.collectionVariables.set(\"itemId\", data.id);",
+                  "  pm.collectionVariables.set(\"code\", data.code);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Edit item",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/owner/items/{{itemId}}",
+            "description": "Price edits invalidate unreserved agreements. Set mode=fixed and floorPence=null to remove bargaining.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"notes\": \"Scripted scenario: small scuff on base.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Upload JPEG on main stall",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "image/jpeg"
+              }
+            ],
+            "url": "{{baseUrl}}/api/owner/items/{{itemId}}/photo",
+            "description": "Select a local JPEG in the binary body picker. Maximum 512 KiB. Requires Supabase Storage. Demo uploads return 403.",
+            "body": {
+              "mode": "file",
+              "file": {}
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Remove available item",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/owner/items/{{itemId}}/remove",
+            "description": "Optional mutation; do not run before buying the same item. Refused during reservation.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"Removed for scripted scenario\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Printable tag data",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/owner/tags",
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "name": "Set closing time",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"closingTime\": \"17:00\"\n}"
+            },
+            "url": "{{baseUrl}}/api/owner/stall/closing-time",
+            "description": "UK time, HH:MM. Price reviews run by themselves in the last two hours before it. Send null to clear it."
+          },
+          "response": []
+        },
+        {
+          "name": "Open trading session",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": "{{baseUrl}}/api/owner/stall/open",
+            "description": "Open before buyer chat or checkout. Reopening requires the previous session to finish closing."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Chat and agreed price",
+      "item": [
+        {
+          "name": "Ask a question",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/i/{{code}}/chat",
+            "description": "Requires configured model, an available haggle item and buyer cookie. No model key means chat is unavailable. Answers 429 with Retry-After when the service-wide chat limit is reached, before using a session turn.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Does it work?\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Make structured offer",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/i/{{code}}/chat",
+            "description": "Integer pence. The server issues a card; this does not agree a price or reserve an item.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"offerPence\": 1500\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code >= 200 && pm.response.code < 300) {",
+                  "  const data = pm.response.json();",
+                  "  if (data.card) pm.collectionVariables.set(\"cardId\", data.card.id);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Accept issued card",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": "{{baseUrl}}/api/i/{{code}}/cards/{{cardId}}/accept",
+            "description": ""
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code >= 200 && pm.response.code < 300) {",
+                  "  const data = pm.response.json();",
+                  "  pm.collectionVariables.set(\"agreedPriceId\", data.agreedPrice.id);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Checkout - choose asking or agreed price",
+      "item": [
+        {
+          "name": "Reserve at asking price",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/i/{{code}}/checkout",
+            "description": "Choose this OR agreed-price checkout. Requires real sandbox credentials. Stores checkout and order IDs.",
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code >= 200 && pm.response.code < 300) {",
+                  "  const data = pm.response.json();",
+                  "  pm.collectionVariables.set(\"checkoutId\", data.checkoutId);",
+                  "  if (data.paypalOrderId) pm.collectionVariables.set(\"paypalOrderId\", data.paypalOrderId);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Reserve at agreed price",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/i/{{code}}/checkout",
+            "description": "Requires this buyer cookie and a current accepted card. No client-supplied amount is accepted.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"agreedPriceId\": \"{{agreedPriceId}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code >= 200 && pm.response.code < 300) {",
+                  "  const data = pm.response.json();",
+                  "  pm.collectionVariables.set(\"checkoutId\", data.checkoutId);",
+                  "  if (data.paypalOrderId) pm.collectionVariables.set(\"paypalOrderId\", data.paypalOrderId);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Reserve at a chosen amount (pay what you want)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/i/{{code}}/checkout",
+            "description": "Only for a pay-what-you-want item, which takes no agreed price. The server accepts amountPence only between the item's public minimum and £500, answers 422 stating the limit otherwise, and stores the accepted amount as the checkout total. Capture never reads an amount from the client.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amountPence\": 1234\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code >= 200 && pm.response.code < 300) {",
+                  "  const data = pm.response.json();",
+                  "  pm.collectionVariables.set(\"checkoutId\", data.checkoutId);",
+                  "  if (data.paypalOrderId) pm.collectionVariables.set(\"paypalOrderId\", data.paypalOrderId);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Take a free item",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/i/{{code}}/take",
+            "description": "Only for a free item. Open item first to get a buyer cookie. There is no PayPal step: the take is recorded at once, or the answer is 409 when someone else took it first. A repeat from the same buyer session returns the take as it was.",
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Leave a thank-you message on a take",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/i/{{code}}/take/message",
+            "description": "After Take a free item, from the same buyer session. Sets the taker's thank-you message once: at most 280 characters, cleaned to one plain line, and not blank. A repeat of the same message returns the take; a different one gets 409. 404 when this session has not taken the item, 409 once the stall has closed.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Thank you!\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Tip on a taken free item",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/i/{{code}}/checkout",
+            "description": "Only after Take a free item, from the same buyer session. This is the pay-what-you-want checkout: amountPence from 1 to 50000, 422 stating the limit otherwise, and 409 before the take or after the stall closes. A tip never holds, sells or releases the item.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amountPence\": 350\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code >= 200 && pm.response.code < 300) {",
+                  "  const data = pm.response.json();",
+                  "  pm.collectionVariables.set(\"checkoutId\", data.checkoutId);",
+                  "  if (data.paypalOrderId) pm.collectionVariables.set(\"paypalOrderId\", data.paypalOrderId);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Read checkout",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/checkouts/{{checkoutId}}",
+            "description": "Read state after uncertainty before attempting another payment."
+          },
+          "response": []
+        },
+        {
+          "name": "Capture approved checkout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/checkouts/{{checkoutId}}/capture",
+            "description": "Manual only after genuine PayPal sandbox approval for this order. Postman does not perform browser approval. The original buyer cookie must match; approval alone is not payment.",
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Cancel checkout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/checkouts/{{checkoutId}}/cancel",
+            "description": "Alternative to capture, not the next step after a successful payment.",
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Cancel checkout (PayPal SDK cancel)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/checkouts/{{checkoutId}}/sdk-cancel",
+            "description": "What the page sends when the PayPal SDK reports a cancel. Reads the order from PayPal first and captures it if PayPal has it approved, otherwise releases the checkout. The Cancel checkout button uses the route above, which never captures. The original buyer cookie must match.",
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Owner feed and closing",
+      "item": [
+        {
+          "name": "Feed snapshot",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/owner/feed",
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "name": "Recheck flagged payment",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": "{{baseUrl}}/api/owner/checkouts/{{checkoutId}}/recheck",
+            "description": "Owner cookie required. Choose a flagged checkout from the feed. Reads PayPal evidence and may update payment state; 409 if no review is required. A successful check does not necessarily resolve the payment."
+          },
+          "response": []
+        },
+        {
+          "name": "Feed updates - long-lived SSE",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/owner/feed/stream",
+            "description": "Manual streaming request. Cancel it to end the connection. Owner cookie required; exclude from a sequential collection run."
+          },
+          "response": []
+        },
+        {
+          "name": "Close trading session",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": "{{baseUrl}}/api/owner/stall/close",
+            "description": "Stops new reservations. Existing checkouts keep their original deadline."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code >= 200 && pm.response.code < 300) {",
+                  "  const data = pm.response.json();",
+                  "  pm.collectionVariables.set(\"sessionId\", data.sessionId);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Read closing report",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/owner/closing",
+            "description": ""
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "if (pm.response.code >= 200 && pm.response.code < 300) {",
+                  "  const data = pm.response.json();",
+                  "  if (data.closing) pm.collectionVariables.set(\"sessionId\", data.closing.sessionId);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Write closing summary",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": "{{baseUrl}}/api/owner/closing/summary",
+            "description": "Asks the model for a neutral summary of the structured closing report. Spends model tokens against the daily cap, unless the report is unchanged since the saved summary, which comes back with no model call. The summary is null when no model is configured, the model fails, the cap is reached or the check refuses its figures or wording; the report is unaffected. On the published demo stall only, the response also carries a `trace`: the outcome, the refusal rule, the finish reason, and input and output tokens. It never carries the model's text."
+          },
+          "response": []
+        },
+        {
+          "name": "Check closing with PayPal",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": "{{baseUrl}}/api/owner/closing/paypal-check",
+            "description": "Reads this stall's sandbox orders with the PayPal Agent Toolkit and compares them with the recorded totals. Read-only. The transaction listing part needs Transaction Search enabled on the PayPal app."
+          },
+          "response": []
+        },
+        {
+          "name": "Record closing exception",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/owner/closing/shelf-check",
+            "description": "Optional. Use absent to flag an unsold item as not at the stall, and unknown to clear the flag. Removed requires a reason. Removing takes the item off sale unless payment holds it; correcting a removal can restore it unless a completed capture exists.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sessionId\": \"{{sessionId}}\",\n  \"itemId\": \"{{itemId}}\",\n  \"observation\": \"unknown\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Read charity pledge",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/owner/stall/charity",
+            "description": "Returns the stall's charity pledge, or null, sessionFixed, true when the open session has a recorded sale and so keeps its own pledge, and donateButton, true when this server has a Donate button ID. The demo stall has no pledge, so this returns null there."
+          },
+          "response": []
+        },
+        {
+          "name": "Set charity pledge",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "content-type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/owner/stall/charity",
+            "description": "Sets the charity name and a whole-number percentage from 1 to 100. Buyers then see one line on item pages and the closing report works out the pledged amount from recorded sales after refunds. The change reaches an open session only until its first recorded sale. After that it saves for the next session and sessionFixed is true. A closing or closed session never takes the change, and sessionFixed is false because it describes only an open session.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Garden Rescue\",\n  \"percent\": 10\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Remove charity pledge",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/api/owner/stall/charity",
+            "description": "Removes the pledge from the stall, and from an open session with no recorded sale. A session with a recorded sale, or a closing or closed session, keeps its pledge and its recorded donations, and a donation can still be recorded against it once it has closed."
+          },
+          "response": []
+        },
+        {
+          "name": "Record Donate button result",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "content-type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/owner/closing/donation",
+            "description": "Records what PayPal's Donate button reported for a closing session. It writes a donation row only and changes no sales figure. Use a real sandbox transaction ID from the Donate pop-up; the API cannot check it against PayPal. A status other than Completed or an unreadable amount returns 422 and records nothing. A session that is still open or never carried a pledge returns 409. Returns 429 after 20 recorded donations an hour for a stall; a repeated transaction ID records nothing and is not counted.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sessionId\": \"{{sessionId}}\",\n  \"transactionId\": \"SANDBOXTX123\",\n  \"status\": \"Completed\",\n  \"amount\": \"2.80\",\n  \"currency\": \"GBP\"\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Stall ledger data",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/owner/ledger/data",
+            "description": "Every session, ledger row, offer and item for the logged-in stall, plus today's service-wide AI spend against the daily cap. Holds no floors, notes, chat text or buyer ids."
+          },
+          "response": []
+        },
+        {
+          "name": "Stall ledger price journeys",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/owner/ledger/journeys",
+            "description": "Owner-only ordered item price journeys across listing, price drops, offers, cards, agreements, completed captures and completed refunds. Returns only the narrow journey row shape and no floors, item notes, buyer text, payer data or payment identifiers."
+          },
+          "response": []
+        },
+        {
+          "name": "Stall ledger config",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/owner/ledger/config",
+            "description": "The optional AG Studio licence key, and whether the Stall clerk is on."
+          },
+          "response": []
+        },
+        {
+          "name": "Check the ledger with PayPal",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": "{{baseUrl}}/api/owner/ledger/paypal-check",
+            "description": "Owner cookie required. Reads, with the PayPal Agent Toolkit's get_order, each captured order on the stall that has no PayPal read yet, from every session, at most 40 a press, and stores what PayPal said for the ledger's PayPal order read column. Read-only at PayPal and in the records. The answer gives counts, a note and each order's tag codes and outcome, with no PayPal order ids. With nothing left to read it makes no PayPal call and says so. It does not list transactions; the closing check does."
+          },
+          "response": []
+        },
+        {
+          "name": "Stall clerk turn",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"input\": [{ \"type\": \"message\", \"kind\": \"input\", \"role\": \"user\", \"status\": \"completed\", \"content\": [{ \"type\": \"text\", \"text\": \"What are the recorded sales for each session?\" }] }]\n}"
+            },
+            "url": "{{baseUrl}}/api/owner/ledger/ai",
+            "description": "One model turn as newline-delimited events. Spends the ledger's daily allowance. Answers 429 when the allowance, the hourly limit or the limit on turns running at once is reached, and 400 for a tool name outside the server's list."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Owner session and demo reset",
+      "item": [
+        {
+          "name": "Reset seeded demo",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": "{{baseUrl}}/api/owner/demo/reset",
+            "description": "Log in with demo password first. Mutates demo stock and codes. Refused for main owner or payments still in progress. Returns 429 after 120 completed resets of a stall in an hour; a refused reset is not counted. Flagged checkouts do not block reset; their records and items remain for review. Do not include in routine runs."
+          },
+          "response": []
+        },
+        {
+          "name": "Run demo price review",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": "{{baseUrl}}/api/owner/demo/price-review",
+            "description": "Log in with demo password first. One Claude call, so it spends AI budget. Refused on the main stall, on a closed stall, and after two reviews in a trading session. May lower demo prices. Do not include in routine runs."
+          },
+          "response": []
+        },
+        {
+          "name": "Owner logout",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": "{{baseUrl}}/api/owner/logout",
+            "description": ""
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Webhook - manual signed delivery only",
+      "item": [
+        {
+          "name": "Deliver original PayPal event",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "paypal-auth-algo",
+                "value": "{{webhookAuthAlgo}}"
+              },
+              {
+                "key": "paypal-cert-url",
+                "value": "{{webhookCertUrl}}"
+              },
+              {
+                "key": "paypal-transmission-id",
+                "value": "{{webhookTransmissionId}}"
+              },
+              {
+                "key": "paypal-transmission-sig",
+                "value": "{{webhookTransmissionSig}}"
+              },
+              {
+                "key": "paypal-transmission-time",
+                "value": "{{webhookTransmissionTime}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/webhooks/paypal",
+            "description": "Paste the exact original signed JSON into the raw body and set all transmission header variables from the same event. An invented body or signature must be rejected. Prefer PayPal dashboard resend; Postman is not evidence of genuine service delivery.",
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

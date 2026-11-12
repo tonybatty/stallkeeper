@@ -1,0 +1,25 @@
+name: Demo watch
+# The hosted demo has to keep working unattended through the judging period. A failed run emails the repository owner.
+# This uses no secrets and makes read-only GET requests: no chat turns, no payments, no logins.
+on:
+  schedule:
+    - cron: '17 6 * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      BASE_URL: https://stallkeeper.onrender.com
+    steps:
+      - name: Health answers with a deployed commit
+        run: |
+          curl --fail --silent --show-error --max-time 60 --retry 3 --retry-delay 10 --retry-all-errors "$BASE_URL/api/health" -o health.json
+          jq -e '.status == "ok" and (.commit | type == "string" and length > 0)' health.json
+          echo "Deployed commit: $(jq -r .commit health.json)"
+      - name: Demo stall lists at least one available haggle item
+        run: |
+          curl --fail --silent --show-error --max-time 60 --retry 3 --retry-delay 10 --retry-all-errors "$BASE_URL/api/demo" -o demo.json
+          jq -e '[.items[] | select(.mode == "haggle" and .availability == "available")] | length > 0' demo.json

@@ -1,0 +1,146 @@
+{
+  "takeId": "take-1",
+  "supersedes": null,
+  "mode": "real",
+  "model": "claude",
+  "environment": "iOS Simulator, Safari, iPhone 17",
+  "build": {
+    "commit": "6677167",
+    "web": "index-7APxM3d2.js"
+  },
+  "host": "stallkeeper.onrender.com",
+  "startedAt": "2026-11-06T06:50:05.277Z",
+  "reach": "sale",
+  "endedAt": "2026-11-06T06:52:55.050Z",
+  "approval": {
+    "reservationSeconds": 300,
+    "loginFormMs": 3548,
+    "reservedToPaidMs": 16772,
+    "approveToPaidMs": 3667,
+    "captureSentWhile": "hidden",
+    "pageReloaded": false,
+    "paypalTabClosedAfterMs": 436,
+    "buyerPageShownAfterMs": 440
+  },
+  "status": "stopped",
+  "problems": [],
+  "itemCode": "JZF5",
+  "tag": {
+    "decodedPath": "/i/JZF5",
+    "openedItemName": "Brass desk lamp"
+  },
+  "askingPence": 2800,
+  "agreedPence": 2400,
+  "checkoutPence": 2400,
+  "checkoutSuffix": "44577c",
+  "approvalOrderSuffix": "36154C",
+  "paypalHost": "www.sandbox.paypal.com",
+  "orderSuffix": "36154C",
+  "captureSuffix": "565618",
+  "captureCurrency": "GBP",
+  "webhookEventSuffix": "42452P",
+  "totalsBefore": {
+    "recordedSalesPence": 0,
+    "itemsSold": 0
+  },
+  "totalsAfter": {
+    "recordedSalesPence": 2400,
+    "itemsSold": 1
+  },
+  "closing": null,
+  "aiSpend": {
+    "beforeUsd": 0.13129,
+    "afterUsd": 0.137288
+  },
+  "aiReplies": [
+    {
+      "question": "Does it work?",
+      "reply": "The owner says it's tested and it works. There's a small scuff on the base, and it takes a standard screw bulb. The asking price is £28."
+    },
+    {
+      "question": "I offer £15.",
+      "reply": "I can't do £15, but I can do £24. The owner says it's tested and works. There's a card for £24 you can tap if you'd like to choose it."
+    }
+  ],
+  "beats": [
+    {
+      "id": "earlier",
+      "startedAt": "2026-11-06T06:51:15.644Z",
+      "endedAt": "2026-11-06T06:51:26.484Z",
+      "outcome": "done"
+    },
+    {
+      "id": "tag-url",
+      "startedAt": "2026-11-06T06:51:26.484Z",
+      "endedAt": "2026-11-06T06:51:29.892Z",
+      "outcome": "done"
+    },
+    {
+      "id": "question",
+      "startedAt": "2026-11-06T06:51:29.892Z",
+      "endedAt": "2026-11-06T06:51:35.197Z",
+      "outcome": "done"
+    },
+    {
+      "id": "offer",
+      "startedAt": "2026-11-06T06:51:35.197Z",
+      "endedAt": "2026-11-06T06:51:41.023Z",
+      "outcome": "done"
+    },
+    {
+      "id": "agree",
+      "startedAt": "2026-11-06T06:51:41.023Z",
+      "endedAt": "2026-11-06T06:51:44.557Z",
+      "outcome": "done"
+    },
+    {
+      "id": "reserve",
+      "startedAt": "2026-11-06T06:51:44.557Z",
+      "endedAt": "2026-11-06T06:51:51.140Z",
+      "outcome": "done"
+    },
+    {
+      "id": "approve",
+      "startedAt": "2026-11-06T06:51:51.140Z",
+      "endedAt": "2026-11-06T06:52:22.276Z",
+      "outcome": "done"
+    },
+    {
+      "id": "paid",
+      "startedAt": "2026-11-06T06:52:22.276Z",
+      "endedAt": "2026-11-06T06:52:22.276Z",
+      "outcome": "skipped",
+      "note": "The take reads the paid page inside the approve beat, so there is no separate step."
+    },
+    {
+      "id": "feed",
+      "startedAt": "2026-11-06T06:52:22.276Z",
+      "endedAt": "2026-11-06T06:52:27.610Z",
+      "outcome": "done"
+    },
+    {
+      "id": "closing",
+      "startedAt": "2026-11-06T06:52:27.610Z",
+      "endedAt": "2026-11-06T06:52:27.610Z",
+      "outcome": "skipped",
+      "note": "This take stops before closing. Run with --through closing."
+    }
+  ],
+  "recordings": [
+    {
+      "role": "buyer",
+      "file": "buyer.mp4",
+      "startedAt": "2026-11-06T06:51:15.639Z"
+    },
+    {
+      "role": "owner",
+      "file": "owner.mp4",
+      "startedAt": "2026-11-06T06:51:15.641Z"
+    },
+    {
+      "role": "rival",
+      "file": "rival.mp4",
+      "startedAt": "2026-11-06T06:51:15.644Z"
+    }
+  ]
+}

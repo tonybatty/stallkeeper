@@ -1,0 +1,16 @@
+packages:
+  - apps/*
+allowBuilds:
+  '@embedded-postgres/darwin-arm64': true
+  '@embedded-postgres/darwin-x64': true
+  '@embedded-postgres/linux-arm64': true
+  '@embedded-postgres/linux-x64': true
+  esbuild: true
+# Remove these overrides when the consumers adopt patched releases.
+# Advisory rationale and compatibility evidence: docs/SECURITY-REVIEW.md.
+overrides:
+  '@paypal/agent-toolkit>@langchain/core': 0.3.80
+  '@paypal/agent-toolkit>mathjs': 15.2.0
+  'ai@4>jsondiffpatch': 0.7.6
+  'glob@13': 14.0.4
+  'minimatch@10': 11.0.1

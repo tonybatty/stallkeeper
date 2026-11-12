@@ -1,0 +1,157 @@
+{
+  "takeId": "take-2",
+  "supersedes": null,
+  "mode": "real",
+  "model": "claude",
+  "environment": "iOS Simulator, Safari, iPhone 17",
+  "build": {
+    "commit": "668529b",
+    "web": "index-UOaHVAWw.js"
+  },
+  "host": "stallkeeper.onrender.com",
+  "startedAt": "2026-11-06T04:17:55.485Z",
+  "reach": "closing",
+  "endedAt": "2026-11-06T04:20:21.472Z",
+  "approval": {
+    "reservationSeconds": 300,
+    "loginFormMs": 3396,
+    "reservedToPaidMs": 16789,
+    "approveToPaidMs": 4314,
+    "captureSentWhile": "hidden",
+    "pageReloaded": false,
+    "paypalTabClosedAfterMs": 464,
+    "buyerPageShownAfterMs": 475
+  },
+  "status": "complete",
+  "problems": [],
+  "itemCode": "WHMY",
+  "tag": {
+    "decodedPath": "/i/WHMY",
+    "openedItemName": "Brass desk lamp"
+  },
+  "askingPence": 2800,
+  "agreedPence": 2400,
+  "checkoutPence": 2400,
+  "checkoutSuffix": "649783",
+  "approvalOrderSuffix": "618843",
+  "paypalHost": "www.sandbox.paypal.com",
+  "orderSuffix": "618843",
+  "captureSuffix": "62104M",
+  "captureCurrency": "GBP",
+  "webhookEventSuffix": "166123",
+  "totalsBefore": {
+    "recordedSalesPence": 0,
+    "itemsSold": 0
+  },
+  "totalsAfter": {
+    "recordedSalesPence": 2400,
+    "itemsSold": 1
+  },
+  "closing": {
+    "stagedCode": "F2W9",
+    "status": "final",
+    "recordedSalesPence": 2400,
+    "differenceCodes": [
+      "F2W9"
+    ],
+    "shownOnScreen": true
+  },
+  "aiSpend": {
+    "beforeUsd": 0.068724,
+    "afterUsd": 0.078812
+  },
+  "aiReplies": [
+    {
+      "question": "Does it work?",
+      "reply": "The owner says it's tested and it works. The notes also mention a scuff on the base. The asking price is £28."
+    },
+    {
+      "question": "Is the shade original?",
+      "reply": "I don't know. The owner's notes don't cover the shade. They only say it was made in 1970, it's 30 cm tall, it has a scuff on the base, and it's tested and works."
+    },
+    {
+      "question": "I offer £15.",
+      "reply": "I can't do £15, but I can do £24. The owner says it's tested and it works. There's a card for £24 now, and you can tap it if you'd like that price."
+    }
+  ],
+  "beats": [
+    {
+      "id": "earlier",
+      "startedAt": "2026-11-06T04:18:09.748Z",
+      "endedAt": "2026-11-06T04:18:24.100Z",
+      "outcome": "done"
+    },
+    {
+      "id": "tag-url",
+      "startedAt": "2026-11-06T04:18:24.100Z",
+      "endedAt": "2026-11-06T04:18:27.506Z",
+      "outcome": "done"
+    },
+    {
+      "id": "question",
+      "startedAt": "2026-11-06T04:18:27.506Z",
+      "endedAt": "2026-11-06T04:18:38.425Z",
+      "outcome": "done"
+    },
+    {
+      "id": "offer",
+      "startedAt": "2026-11-06T04:18:38.425Z",
+      "endedAt": "2026-11-06T04:18:45.150Z",
+      "outcome": "done"
+    },
+    {
+      "id": "agree",
+      "startedAt": "2026-11-06T04:18:45.150Z",
+      "endedAt": "2026-11-06T04:18:48.690Z",
+      "outcome": "done"
+    },
+    {
+      "id": "reserve",
+      "startedAt": "2026-11-06T04:18:48.690Z",
+      "endedAt": "2026-11-06T04:18:55.394Z",
+      "outcome": "done"
+    },
+    {
+      "id": "approve",
+      "startedAt": "2026-11-06T04:18:55.394Z",
+      "endedAt": "2026-11-06T04:19:26.709Z",
+      "outcome": "done"
+    },
+    {
+      "id": "paid",
+      "startedAt": "2026-11-06T04:19:26.709Z",
+      "endedAt": "2026-11-06T04:19:26.709Z",
+      "outcome": "skipped",
+      "note": "The take reads the paid page inside the approve beat, so there is no separate step."
+    },
+    {
+      "id": "feed",
+      "startedAt": "2026-11-06T04:19:26.709Z",
+      "endedAt": "2026-11-06T04:19:32.010Z",
+      "outcome": "done"
+    },
+    {
+      "id": "closing",
+      "startedAt": "2026-11-06T04:19:32.010Z",
+      "endedAt": "2026-11-06T04:19:48.394Z",
+      "outcome": "done"
+    }
+  ],
+  "recordings": [
+    {
+      "role": "buyer",
+      "file": "buyer.mp4",
+      "startedAt": "2026-11-06T04:18:09.745Z"
+    },
+    {
+      "role": "owner",
+      "file": "owner.mp4",
+      "startedAt": "2026-11-06T04:18:09.746Z"
+    },
+    {
+      "role": "rival",
+      "file": "rival.mp4",
+      "startedAt": "2026-11-06T04:18:09.748Z"
+    }
+  ]
+}

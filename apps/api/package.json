@@ -1,0 +1,32 @@
+{
+  "name": "@stallkeeper/api",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --env-file-if-exists=../../.env ./node_modules/tsx/dist/cli.mjs src/dev.ts",
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "start": "NODE_ENV=production node --env-file-if-exists=../../.env dist/index.js"
+  },
+  "dependencies": {
+    "@ai-sdk/anthropic": "^4.0.96",
+    "@channel3/sdk": "4.6.0",
+    "@fastify/cookie": "^11.1.5",
+    "@fastify/static": "^10.1.10",
+    "@paypal/agent-toolkit": "1.11.0",
+    "ai": "^7.0.162",
+    "fastify": "^5.12.8",
+    "pg": "^8.23.1",
+    "qrcode": "^1.5.4",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.23.1",
+    "@types/pngjs": "^6.0.5",
+    "@types/qrcode": "^1.5.6",
+    "embedded-postgres": "18.6.0-beta.19",
+    "jsqr": "^1.4.0",
+    "pngjs": "^7.0.0",
+    "tsx": "^4.20.0"
+  }
+}
